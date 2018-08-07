@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				display: none;
+				width: 200px;
+				height: 200px;
+				border: 2px solid #000080;
+			}
+			.active{
+				background: red;
+			}
+			.box{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<input type="button" value="A" class="active"/>
+		<input type="button" value="B"/>
+		<input type="button" value="C"/>
+		<div class="box">AAAA</div>
+		<div>BBBB</div>
+		<div>CCCC</div>
+		
+		<script type="text/javascript">
+			
+			var btn = document.querySelectorAll("input");
+			var box = document.querySelectorAll("div");
+			
+			for(let i=0; i<btn.length; i++){
+				btn[i].onclick = function () {
+					
+					for(let i=0; i<btn.length; i++){
+						btn[i].className = "";
+						box[i].style.display = "none"; 
+					}
+					
+					this.className = "active";
+					box[i].style.display = "block";
+				}
+			}
+			
+			
+		</script>
+	</body>
+</html>

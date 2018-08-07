@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let obj = {
+				left:100,
+				top:200
+			}
+			
+			//console.log(Object.keys(obj))
+			
+			obj[Symbol.iterator] = function () {
+				let keys = Object.keys(obj);  //["left","top"]
+				let len = keys.length;
+				let n = 0;
+				return {
+					next:function(){
+						if (n<len) {
+							return {
+								value:{k:keys[n],v:obj[keys[n++]]},
+								done:false
+							}
+						}else{
+							return {
+								done:true
+							}
+						}
+					}
+				}
+			}
+			
+			for (var {k,v} of obj) {
+				console.log(k,v)
+			}
+			
+		</script>
+	</body>
+</html>

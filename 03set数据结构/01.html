@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			const s = new Set([1,2,3])
+			
+			//添加数据   返回数据本身
+			
+			s.add('a').add('b')  
+			
+			//删除数据  返回一个布尔值  表示是否删除成功
+			s.delete('a')
+			
+			
+			//has 判断值是否在数据中  返回一个布尔值
+			console.log(s.has("a"))
+			
+			
+			//clear清楚数据
+			s.clear();
+			
+		
+			console.log(s)
+		</script>
+	</body>
+</html>
