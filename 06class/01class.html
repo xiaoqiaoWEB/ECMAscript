@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/*
+			const Miaov = function(a,b){
+				this.a = a;
+				this.b = b;
+				return this;
+			}
+			
+			Miaov.prototype = {
+				constructor :Miaov,
+				print:function(){
+					console.log(this.a + ' '+ this.b)
+				}
+			}
+			
+			const miaov = new Miaov("hello","world").print();
+			*/
+			
+			
+			class Miaov {
+				//一个类必须有constructor 方法，如果没有显示定义，一个空的constructor方法会被默认添加
+				constructor(a,b){
+					this.a = a;
+					this.b = b;
+					return this;
+				}
+				
+				//定义在类中方法是不可以枚举的
+				print () { //方法 不要加，
+					console.log(this.a + ' '+ this.b)
+				}
+			}
+			
+			const miaov = new Miaov("hello","world").print();
+			
+			//类的所有方法都定义在类的prototype属性上面
+			console.log(Miaov.prototype)
+			
+			class p {};
+			
+			const p1 = new p();
+			
+			console.log(p)
+			
+			
+		</script>
+	</body>
+</html>

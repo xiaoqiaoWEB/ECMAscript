@@ -105,4 +105,6 @@ Iterator 遍历器
 			for (var {k,v} of obj) {
 				console.log(k,v)
 			}
+
+class 类
 			
