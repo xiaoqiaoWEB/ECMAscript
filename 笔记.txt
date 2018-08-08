@@ -169,3 +169,22 @@ Iterator 遍历器
 	1.为函数参数指定默认值
 	2.函数的rest参数
 	3.箭头函数
+
+Promise 异步编程
+     * 基本概念：
+     *  Promise：是ES6中新增的异步编程解决方案，体现在代码中它是一个对象，
+     *          可以通过 Promise 构造函数来实例化。
+     *
+     *  - new Promise(cb)  ===> 实例的基本使用  Pending Resolved Rejected
+     *
+     *  > 两个原型方法：
+            成功的时候执行
+     *    - Promise.prototype.then()
+             失败的时候执行
+     *    - Promise.prototype.catch()
+     *
+     *  > 两个常用的静态方法：
+     *    - Promise.all()
+                 //只有所有的异步成功返回 resolve
+     *    - Promise.resolve()
+                /参数是Prosize实例，将不做任何修改，原封不动地返回这个实例
