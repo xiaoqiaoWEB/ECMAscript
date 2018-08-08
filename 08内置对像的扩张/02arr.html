@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script>
+   var lis = document.querySelectorAll("li");
+   console.log(Array.isArray(lis)) //lis 不是一个数组
+
+   var lis1 = Array.from(lis)
+    console.log(Array.isArray(lis1))  //true
+
+    var lis2 = Array.of(2);
+   console.log(lis2)
+
+
+    var lis3 = [1,2,3,4,5,6,7]
+    var lis4 = lis3.find((item)=>{
+        return item<4
+    })
+
+    console.log(lis4) //1
+
+    var lis5 = lis3.findIndex((item) => item<4)
+    console.log(lis5)//0
+
+    var lis6 = lis3.fill('a',2,4);
+   console.log(lis6)
+
+
+</script>
+</body>
+</html>

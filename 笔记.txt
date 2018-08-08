@@ -106,5 +106,66 @@ Iterator 遍历器
 				console.log(k,v)
 			}
 
-class 类
-			
+数据类型
+	Number、Boolean、String、Symbol、Null、Undefined、Object
+	Symbol
+	Symbol类型的值通过Symbol函数生成，相同Symbol函数返回的值是唯一的
+	Symbol函数可以接收字符串作为参数，但是即使相同参数返回的也是唯一值，即 Symbol('miaov') != Symbol('miaov')
+	Symbol不能作为构造函数使用
+		不能转换成数字，不能和字符串拼接，不能做任何运算
+	实例
+		私有变量
+	 const list = {
+        a:"a1",
+        b:'a2',
+        [Symbol()]:"swx",
+        [Symbol()]:"haixu"
+    }
+    console.log(list)
+    console.log(Object.getOwnPropertySymbols(list)) //[Symbol(), Symbol()]
+    console.log(list[Object.getOwnPropertySymbols(list)[0]]) //swx
+		
+内置对象的扩张
+		模板字符串  ``
+			//repeat(n) 赋值字符n次
+			//includes(v) 判断字符串中是否有v 有返回 true 没有返回 false
+			//startsWith（判断字符串中是否是以 v 开头
+			//endsWith（v）判断字符串是否以v结尾
+		数组
+			 Array.from（）  类数组转换成数组
+			 Array.of() 创建数组
+			 find() 查找某一条件的返回符合的第一个元素    没有返回undefind
+			 findIndex() 查找某一条件的返回符合元素的 第一个下标      没有返回-1
+			 fill( a,n1,n2) 替换数组  用a 替换数组从n1，n2  不包括n2
+		对象
+			Object.is() 
+				1 === 1 // true
+				Object.is(1, 1) // true
+				 
+				'a' === 'a' // true
+				Object.is('a', 'a') // true
+				 
+				true === true // true
+				Object.is(true, true) // true
+				 
+				null === null // true
+				Object.is(null, null) // true
+				 
+				undefined === undefined // true
+				Object.is(undefined, undefined) // true
+				
+				NaN === NaN // false
+				Object.is(NaN, NaN) // true
+				 
+				0 === -0 // true
+				Object.is(0, -0) // false
+				 
+				-0 === +0 // true
+				Object.is(-0, +0) // false
+				
+			Object.assign() 合并对象，将元对象的所有可枚举属性，复制到目标对象
+
+函数的扩展
+	1.为函数参数指定默认值
+	2.函数的rest参数
+	3.箭头函数
