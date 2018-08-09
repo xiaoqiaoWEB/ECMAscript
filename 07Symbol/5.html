@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var Person = (function(){
+        let _gender = Symbol("gender");
+        function P (name,gender){
+            this.name = name;
+            this[_gender] = gender;
+        }
+        P.prototype.say = function (){
+            console.log(this[_gender])
+        }
+
+        return P;
+    })();
+
+    let p1 = new Person("xiaoqiao","boy");
+    console.log(p1)
+   // console.log(p1.[Symbol("gender")])
+    console.log(p1.say())  //undefined
+</script>
+</body>
+</html>

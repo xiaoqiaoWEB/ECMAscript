@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+   // 扩展运算符
+   //...
+   //把数组/对象转成参数序列（使用逗号分隔的序列）
+    let arr = [1,2,354,8,50];
+    console.log(Math.max(...arr))
+    console.log([...arr])
+
+    let obj1 = {left:200,top:150};
+    let obj2 = {right:100,bottom:400,top:200};
+
+    let obj3 = {
+        ...obj1,
+        ...obj2
+    }
+    console.log(obj3)
+
+</script>
+</body>
+</html>

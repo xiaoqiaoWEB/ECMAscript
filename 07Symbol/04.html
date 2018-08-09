@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // function Person (name,gender){
+    //     this.name = name;
+    //     this.gender = gender;
+    // }
+    //
+    // let p1 = new Person("jeck","boy");
+    // console.log(p1.gender)
+
+
+    var Person = (function(){
+        let _gender = "";
+        function P (name,gender){
+            this.name = name;
+            _gender = gender;
+        }
+        P.prototype.getgender = function () {
+            return _gender;
+        }
+        return P;
+    })();
+
+    let p1 = new Person("小乔","男");
+    console.log(p1)
+    console.log(p1.getgender()) //男
+
+
+
+
+</script>
+</body>
+</html>
