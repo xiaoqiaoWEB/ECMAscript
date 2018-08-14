@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+
+    /*
+        箭头函数
+            使用函数表达式
+    */
+
+    let fn1 = () => {console.log('fn1')};
+    // let fn1 = function() {console.log('fn1')};
+
+    fn1();
+
+    let fn2 = (x, y) => {
+        console.log(x + y);
+    }
+
+    fn2(1,2);
+
+    // 当参数有且仅有一个的时候，() 可以省略，如果没有形参，或者形参多于1个的时候，() 是不能省略的
+    // let fn3 = (x) => {
+    //     console.log(x + 100);
+    // }
+    // 我们可以把上面这个只有一个形参的写法进行简化
+    let fn3 = x => {
+        console.log(x + 100);
+    }
+    fn3(1);
+
+
+    // 返回值
+    // let fn4 = x => {
+    //     return x + 100;
+    // }
+    // 如果函数体内有且只有一条语句，那么 {} 也可以省略，return也是可以省略的，仅有的这一条语句的执行结果就是该函数的返回值，不需要有return语句
+    let fn4 = x => x + 100;
+
+    console.log(fn4(1));
+
+    // 如果多于1条语句，或者返回的值是一个字面量对象 {}，那么 函数的 {} 就不能省略了
+
+    // let fn5 = (x, y) => {a: x, b: y};   //不行的，这里的 {} 是函数的 {}
+
+    let fn5 = (x, y) => {
+        return {
+            x,
+            y
+        }
+    };
+
+
+    // 箭头函数使用的注意事项：
+
+    /*
+        1.内部this对象指向创建期上下文对象
+            普通函数的this指向是在函数的执行期绑定的（确定的）
+    */
+
+    function fn6() {
+        console.log(this);
+    }
+
+    //fn6();  //指向window
+    //var obj = {};
+    //obj.f = fn6;
+    //obj.f();    //指向obj
+    //document.onclick = fn6; //指向触发该事件的对象 document
+
+    // 箭头函数的this在函数创建期间就绑定好了，箭头函数的this指向创建该箭头函数所在的作用域对象（this）
+    let fn7 = () => {
+        console.log(this);
+    }
+
+    fn7();
+    document.onclick = fn7; //fn7内部的this永远都是fn7函数声明的时候所在的this对象
+
+
+
+
+</script>
+
+</body>
+</html>

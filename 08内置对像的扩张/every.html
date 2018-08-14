@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="warp">
+        <h5>
+            <span>选择你要的东西</span>
+            <input type="checkbox" class="checkall">
+            <label>all</label>
+        </h5>
+        <ul>
+            <li><input type="checkbox" class="checkone">美女</li>
+            <li><input type="checkbox" class="checkone">金钱</li>
+            <li><input type="checkbox" class="checkone">工作</li>
+            <li><input type="checkbox" class="checkone">自由</li>
+            <li><input type="checkbox" class="checkone">梦想</li>
+            <li><input type="checkbox" class="checkone">时间</li>
+            <li><input type="checkbox" class="checkone">家人</li>
+            <li><input type="checkbox" class="checkone">流浪</li>
+        </ul>
+    </div>
+
+    <script>
+        var checkAll = document.querySelector('.checkall');
+        var checkOne = document.querySelectorAll(".checkone");
+
+
+        checkAll.onclick = function () {
+            for(var i=0; i<checkOne.length;i++){
+                checkOne[i].checked = this.checked;
+            }
+        }
+
+        for(var i=0; i<checkOne.length;i++) {
+            checkOne[i].onclick = function () {
+                if (!this.checked) {//当前按钮不选中
+                    checkAll.checked = false;
+                } else {//单前按钮选中--判断所有的单选按钮是否选中
+                    let arr = Array.from(checkOne); //把类数组转成数组
+                    let on = arr.every((item) => {
+                        return item.checked
+                    })
+                    if (on) { //所有都选中
+                        checkAll.checked = true;
+                    } else { //不是都选中
+                        checkAll.checked = false;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

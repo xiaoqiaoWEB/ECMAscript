@@ -2,15 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <body>
+
+
 <script>
-    function fn(a=10,b=20) {
-        console.log(a+b);
+
+    /*
+        函数参数默认值
+    */
+
+    // function fn1(x, y) {
+    //     // 通过编码的方式来实现x，y的处理，如果不传入实参的话，我们通过编码来设置默认的值
+    //     var x = x || 0;
+    // }
+
+    function fn2(x = 0, y = 0) {    // 在形参中设置默认的值，如果形参中不是所有的参数都有默认值，那么有默认值的通常写在形参后面
+        console.log(x, y);
     }
-    fn();
-    fn(1,2);
+
+    fn2(1,2);
+    fn2();
+
+    function fn3(x = 0, y) {    //y 写在参数列表的最后面
+    }
+
+    fn3(0, 2);
+
+    function fn4(obj = {x: 1, y: 2}) {
+        console.log(obj);
+    }
+
+    fn4({x:10, y: 20});
+
+
+    // rest 参数
+    // function arrayPush(arr, x, y, z) {  //不定参
+    function arrayPush() {
+        // arguments
+        var arr = arguments[0];
+        for (var i=1; i<arguments.length; i++) {
+            arr.push( arguments[i] );
+        }
+    }
+
+    function arrayPush6(arr, ...newData) {  //从第二个参数开始，后面的数据全部赋值给newData这个参数，注意：剩余参数只能写在形参列表的最后面
+        for (var i=0; i<newData.length; i++) {
+            arr.push( newData[i] );
+        }
+    }
+
+    var arr1 = [1,2,3];
+
+    // arrayPush(arr1, 'a', 'b', 'c');
+    // console.log(arr1);
+
+    arrayPush6(arr1, 'a', 'b', 'c');
+    console.log(arr1);
 </script>
+
 </body>
 </html>

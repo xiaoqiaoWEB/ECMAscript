@@ -8,35 +8,53 @@
 		<script type="text/javascript">
 			let obj = {
 				left:100,
-				top:200
+				top:200,
+				margin:0
 			}
-			
+
 			//console.log(Object.keys(obj))
-			
+
+			// obj[Symbol.iterator] = function () {
+			// 	let keys = Object.keys(obj);  //["left","top"]
+			// 	let len = keys.length;
+			// 	let n = 0;
+			// 	return {
+			// 		next:function(){
+			// 			if (n<len) {
+			// 				return {
+			// 					value:{k:keys[n],v:obj[keys[n++]]},
+			// 					done:false
+			// 				}
+			// 			}else{
+			// 				return {
+			// 					done:true
+			// 				}
+			// 			}
+			// 		}
+			// 	}
+			// }
+
+
 			obj[Symbol.iterator] = function () {
-				let keys = Object.keys(obj);  //["left","top"]
+				let keys = Object.keys(obj);
 				let len = keys.length;
 				let n = 0;
+
 				return {
-					next:function(){
-						if (n<len) {
-							return {
-								value:{k:keys[n],v:obj[keys[n++]]},
-								done:false
-							}
-						}else{
-							return {
-								done:true
-							}
-						}
-					}
+				    next:function () {
+						return n<len?
+							{value:{k:keys[n],v:obj[keys[n++]]},done:false}:
+							{done:true}
+                    }
 				}
-			}
-			
+
+            }
+
+
 			for (var {k,v} of obj) {
 				console.log(k,v)
 			}
-			
+
 		</script>
 	</body>
 </html>

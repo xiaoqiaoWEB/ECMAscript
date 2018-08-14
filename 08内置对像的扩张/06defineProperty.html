@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let obj = {
+        x:'a'
+    }
+
+    obj.y = "c";
+
+    // 通过 defineProperty 添加或修改的属性，configurable\enumerable\value\writable默认是false
+    Object.defineProperty(obj,'z',{
+        value:'d',
+        configurable:true,
+        enumerable:true,
+        writable:true
+    })
+
+    for(attr in obj){
+        console.log(attr);
+    }
+
+    console.log(obj)
+</script>
+</body>
+</html>
