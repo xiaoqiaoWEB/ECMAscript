@@ -45,6 +45,7 @@ const---不可变
 	forEach(value,key,set )遍历每个成员
 
 map数据结构
+    ---和js中的对象类似，但是Map的key值可以接受任意类型
 	let map = new Map([
 				['a',"1"],
 				["b","2"]
@@ -192,3 +193,15 @@ Promise 异步编程
                  //只有所有的异步成功返回 resolve
      *    - Promise.resolve()
                 /参数是Prosize实例，将不做任何修改，原封不动地返回这个实例
+
+
+     Promise
+          构造函数
+          接受一个参数：callback，我们把要执行的异步任务放置在这个callback中
+
+          Promise对象内部会维护一个状态
+              默认是：pending
+              成功：resolved
+              失败：rejected
+
+          Promise对象下有一个方法：then，该方法在Promise对象的状态发生改变的时候触发then的回调

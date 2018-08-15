@@ -1,25 +1,42 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<style type="text/css">
-			canvas{
-				box-shadow: 2px 2px 12px rgba(0,0,0,0.5);
-			}
-		</style>
-	</head>
-	<body>
-		
-		<canvas id="canvas"></canvas>
-		
-		<script type="text/javascript">
-			//class 继承
-			//extends 子类继承父类
-			//static 指定静态方法
-			//super	在构造函数中，可以当一个函数来使用，相当于调用父类的构造函数
-			//		在原型方法中，可以当一个对象来使用，相当于父类的原型对象，并且会自动绑定this到子类上
-			
-		</script>
-	</body>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+
+<script>
+	class Person { //父类
+        constructor(name,sex){
+           this.name = name;
+           this.sex = sex;
+		}
+
+		getName(){
+            //return this.name;
+			console.log(this.name)
+		}
+
+	}
+
+	class PersonChildren extends Person { //子类
+        // 如果子类需要有自己的初始化过程，有自己的constructor函数，那么在子类的constructor就必须要调用父类构造函数
+		constructor(name,sex,job){
+			super(name,sex);
+			this.job = job;
+		}
+	}
+
+
+	var p1 = new Person('小乔','男');
+	p1.getName();
+
+	var p2 = new PersonChildren("海旭",'女','WEB');
+	console.log(p2.getName())
+</script>
+
+</body>
 </html>

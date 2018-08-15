@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    var a = new Map();
+    //和js中的对象类似，但是Map的key值可以接受任意类型
+    a.set(true,'123');
+    a.set(false,'456');
+    a.set([12],'xiaoqiao');
+    */
+
+
+    //console.log(a)
+    //console.log(a.get(true))
+
+
+    //私有数据保护
+    const Person = (function () {
+
+        let _gender = [];
+
+        function P(name,gender) {
+            this.name = name;
+            _gender.push({
+                obj:this,
+                gender
+            });
+            console.log(_gender)
+        }
+
+        P.prototype.getGender = function () {
+            return _gender.find( item => item.obj == this ).gender
+        }
+
+        P.prototype.setGender = function (newGender) {
+            _gender.forEach((item)=>{
+                if (this == item.obj){
+                    item.gender = newGender;
+                }
+            })
+        }
+
+        return P;
+    })();
+
+    var a1 = new Person('xiao','boy');
+    var a2 = new Person('haixu','gilr');
+
+    console.log(a1.getGender());
+    console.log(a2.getGender());
+
+    a1.setGender('AAA');
+
+    console.log(a1.getGender());
+    console.log(a2.getGender());
+
+</script>
+</body>
+</html>
