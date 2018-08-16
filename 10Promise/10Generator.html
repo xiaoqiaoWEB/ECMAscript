@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function* fn(){
+        console.log(1);
+
+        let val = yield getData();
+
+        console.log(val)
+
+        console.log(3);
+
+    }
+
+    function getData() {
+        setTimeout(()=>{
+            console.log(2)
+            f.next(100);
+        },1000)
+    }
+
+    // 返回一个迭代器函数
+    let f = fn();
+    f.next()
+
+</script>
+</body>
+</html>

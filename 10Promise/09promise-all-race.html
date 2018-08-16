@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let p1 = new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+
+            resolve('A');
+
+        },Math.random()*1000)
+    })
+
+    let p2 = new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+
+            //resolve('B');
+            reject('B');
+
+        },Math.random()*1000)
+    })
+
+
+    //Array.every
+    // Promise.all([p1,p2]).then((data)=>{
+    //     console.log(data)
+    // },()=>{
+    //     console.log('出错了')
+    // })
+
+    //Array.some
+    Promise.race([p1,p2]).then((data)=>{
+        console.log(data)
+    },()=>{
+        console.log('出错了')
+    })
+
+
+
+</script>
+</body>
+</html>
