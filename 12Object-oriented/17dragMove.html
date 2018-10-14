@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #btn{position: absolute;left: 0;top:0;}
+        #ul{width: 1250px;margin: 0 auto;position: relative;}
+        li{list-style: none;width: 300px;height: 260px;background: #ff7549;float: left;margin-left: 10px;margin-top: 10px;text-align: center;line-height: 260px;font-size: 80px;color: #fff;}
+    </style>
+    <script src="move.js"></script>
+</head>
+<body>
+<ul id="ul">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+    <li>11</li>
+    <li>12</li>
+    <li>13</li>
+</ul>
+<input type="button" id="btn" value="进行随机排序">
+<script>
+    var lis = document.querySelectorAll('li');
+    var btn = document.getElementById('btn');
+
+    var arr = [];
+    var izIndex = 2;
+
+    //记录所有li的位置
+    for(var i=0; i<lis.length; i++){
+        arr.push([lis[i].offsetLeft,lis[i].offsetTop])
+    }
+
+    //改成 定位布局
+    for (var i=0; i<lis.length; i++) {
+        lis[i].style.position = "absolute";
+        lis[i].style.left = arr[i][0] +'px';
+        lis[i].style.top = arr[i][1] +'px';
+        lis[i].style.margin = 0 +"px";
+    }
+
+    //点击排序
+    btn.onclick= function () {
+        //根据li的长度生成一个数组
+        var arr1 = [];
+        for (let i=0; i<lis.length; i++){
+            arr1.push(i);
+        }
+
+        //利用随机数 进行重新排序
+        arr1.sort(function(n1,n2){
+            return Math.random() - 0.5;
+        })
+
+
+        //让每一个li的对应数组提取 赋值
+        for(var i=0; i<lis.length; i++){
+            startMove(lis[i],{left:arr[arr1[i]][0],top:arr[arr1[i]][1]});
+            //下标也要跟随
+            lis[i].index = arr1[i];
+        }
+
+    }
+
+    //给每个li添加拖拽事件
+    for (var i=0; i<lis.length; i++){
+        lis[i].index = i;
+        drag(lis[i]);
+    }
+
+    function drag (obj) {
+        var disX = 0;
+        var disY = 0;
+        obj.onmousedown = function (ev) {
+
+            obj.style.zIndex = izIndex++;
+
+           disX = ev.clientX - obj.offsetLeft;
+           disY = ev.clientY - obj.offsetTop;
+
+           document.onmousemove = function (ev) {
+               obj.style.left = ev.clientX - disX + 'px';
+               obj.style.top = ev.clientY - disY + 'px';
+
+
+               for(var i=0; i<lis.length; i++){
+                   lis[i].style.background = "#ff7549";
+               }
+
+               //move 的时候找 碰撞 的里 切找出 最近的一个
+               var nL = minLi(obj);
+               if(nL){
+                   nL.style.background="green";
+               }
+           }
+
+           document.onmouseup = function () {
+               document.onmouseup = document.onmousemove  = null;
+               var nL = minLi(obj);
+
+               var tp = 0;
+
+               if(nL){
+                   //找到一开始 存的值 相互 赋值
+                   startMove(obj,{left:arr[nL.index][0],top:arr[nL.index][1]});
+                   startMove(nL,{left:arr[obj.index][0],top:arr[obj.index][1]});
+
+                   tp = obj.index;
+                   obj.index = nL.index;
+                   nL.index = tp;
+
+                   nL.style.background = "#ff7549";
+               }else{
+                   startMove(obj,{left:arr[obj.index][0],top:arr[obj.index][1]});
+               }
+
+           }
+        }
+    }
+
+    function minLi(obj) {  //找到碰撞的 距离最短的 一个
+
+        var value = 9999;
+        var index = -1;
+
+        for (var i=0; i<lis.length; i++){
+            if(pz(obj,lis[i]) && obj != lis[i]){
+                var c = jl(obj,lis[i]);
+                if(c<value){
+                    value = c;
+                    index = i;
+                }
+            }
+        }
+
+        if(index != -1){
+            return lis[index];
+        }else{
+            return false;
+        }
+    }
+
+    //就算 距离
+    function jl(obj1,obj2) {
+        var a = obj1.offsetLeft - obj2.offsetLeft;
+        var b = obj1.offsetTop - obj2.offsetTop;
+        return Math.sqrt(a*a + b*b);
+    }
+
+    //碰撞检测
+    function pz(obj1,obj2) {
+        var L1 = obj1.offsetLeft;
+        var R1 = obj1.offsetLeft + obj1.offsetWidth;
+        var T1 = obj1.offsetTop;
+        var B1 = obj1.offsetTop + obj1.offsetHeight;
+
+        var L2 = obj2.offsetLeft;
+        var R2 = obj2.offsetLeft + obj2.offsetWidth;
+        var T2 = obj2.offsetTop;
+        var B2 = obj2.offsetTop + obj2.offsetHeight;
+
+        if(L1>R2 || R1<L2 || T1>B2 || B1<T2){
+            return false;
+        }else{
+            return true;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #ff7549;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box1"></div>
+<div class="box" id="box2" style="background: gold;left: 200px;"></div>
+
+<script>
+    window.onload = function () {
+        var d1 = new Drag("box1");
+        d1.init();
+
+        var d2 = new DragPos("box2");
+        d2.init();
+    }
+
+    function Drag (id){
+        this.obj = document.getElementById(id);
+        this.disX = 0;
+        this.disY = 0;
+    }
+
+    Drag.prototype.init = function () {
+        var _this = this;
+       this.obj.onmousedown = function (ev) {
+           _this.down(ev);
+       }
+    }
+
+    Drag.prototype.down = function (ev) {
+       this.disX = ev.clientX - this.obj.offsetLeft;
+       this.disY = ev.clientY - this.obj.offsetTop;
+
+       var _this = this;
+       document.onmousemove = function (ev) {
+           _this.move(ev);
+       }
+
+       document.onmouseup = function () {
+           document.onmousemove = null;
+           document.onmouseup = null;
+       }
+
+       return false;
+    }
+
+    Drag.prototype.move = function (ev) {
+        this.obj.style.left = ev.clientX - this.disX + "px";
+        this.obj.style.top = ev.clientY - this.disY + 'px';
+    }
+
+
+    //zilei
+    function DragPos (id) {
+        Drag.call(this,id);  //继承父类的属性
+    }
+
+    extend(DragPos.prototype, Drag.prototype);  //继承父类的方法
+
+    DragPos.prototype.move = function (ev) {  //在子类改写 move函数
+
+        var L = ev.clientX - this.disX;
+        var T = ev.clientY - this.disY;
+
+        if(L<0){
+            L = 0;
+        }else if(L>document.documentElement.clientWidth - this.obj.offsetWidth){
+            L = document.documentElement.clientWidth - this.obj.offsetWidth
+        }
+
+        if(T<0){
+            T = 0;
+        }else if(T>document.documentElement.clientHeight - this.obj.offsetHeight){
+            T = document.documentElement.clientHeight - this.obj.offsetHeight;
+        }
+
+        this.obj.style.left = L + "px";
+        this.obj.style.top = T + 'px';
+    }
+
+    function extend (obj1,obj2){
+        for (attr in obj2){
+            obj1[attr] = obj2[attr];
+        }
+    }
+
+</script>
+</body>
+</html>

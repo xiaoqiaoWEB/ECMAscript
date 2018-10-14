@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+   //对象的继承
+   //继承 : 子类不影响父类，子类可以继承父类的一些功能 ( 代码复用 )
+
+   //属性的继承 : 调用父类的构造函数 call
+
+   //方法的继承 : for in :  拷贝继承 (jquery也是采用拷贝继承extend)
+
+    function Createperson (name,sex) {
+        this.name = name;
+        this.sex = sex;
+    }
+
+    Createperson.prototype.showName = function () {
+        console.log(this.name);
+    }
+
+    var p1 = new Createperson("xiao","gilr");
+
+    console.log(p1)
+
+
+    function CreateStar (name,sex,job) {
+        Createperson.call(this,name,sex);
+        this.job = job;
+    }
+
+
+    var p2 = new CreateStar("xiaoming","boy","WEb");
+
+   extend(CreateStar.prototype,Createperson.prototype);
+
+   CreateStar.prototype.showJob = function () {
+
+   }
+
+    console.log(p2)
+
+
+    function extend (obj1,obj2) {
+        for(attr in obj2){
+            obj1[attr] = obj2[attr];
+        }
+   }
+
+</script>
+</body>
+</html>

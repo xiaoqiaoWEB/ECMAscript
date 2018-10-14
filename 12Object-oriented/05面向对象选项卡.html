@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        input.active{
+            background: blue;
+            color: #ff7549;
+        }
+        .tab div{
+            width: 200px;
+            height: 300px;
+            border: 2px solid gold;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="tab1" class="tab">
+    <input type="button" value="按钮A" class="active">
+    <input type="button" value="按钮B">
+    <input type="button" value="按钮C">
+    <div style="display: block">
+        这里是A
+    </div>
+    <div>
+        这里是B
+    </div>
+    <div>
+        这里是C
+    </div>
+</div>
+
+<div id="tab2" class="tab">
+    <input type="button" value="按钮A" class="active">
+    <input type="button" value="按钮B">
+    <input type="button" value="按钮C">
+    <div style="display: block">
+        这里是A
+    </div>
+    <div>
+        这里是B
+    </div>
+    <div>
+        这里是C
+    </div>
+</div>
+<script>
+window.onload = function () {
+    var t1 = new Tab("tab1").init();
+    var t2 = new Tab("tab2")
+    t2.init();
+    t2.autoPlay();
+    //t2.autoPlay();
+    //console.log(t1)
+}
+
+function Tab (id) {
+    this.oParent = document.getElementById(id);
+    this.aInput = this.oParent.getElementsByTagName("input");
+    this.aDiv = this.oParent.querySelectorAll("div");
+    this.iNow = 0;
+}
+
+Tab.prototype.init = function () {
+    var _this = this;
+   for(var i=0; i<this.aInput.length; i++){
+       this.aInput[i].index = i;
+       this.aInput[i].onclick = function(){
+           //让this 指向对象
+            _this.change(this);
+       };
+   }
+}
+
+Tab.prototype.change = function (btn) {
+   for (var i=0; i<this.aInput.length; i++) {
+       this.aInput[i].className = "";
+       this.aDiv[i].style.display = "none"
+   }
+
+    this.aInput[btn.index].className = "active";
+    this.aDiv[btn.index].style.display = "block"
+}
+
+Tab.prototype.autoPlay = function () {
+    var _this = this;
+    setInterval(function(){
+
+        if( _this.iNow == _this.aInput.length-1 ){
+            _this.iNow = 0;
+        }else{
+            _this.iNow ++;
+        }
+
+        for (var i=0; i<_this.aInput.length; i++) {
+            _this.aInput[i].className = "";
+            _this.aDiv[i].style.display = "none"
+        }
+
+        _this.aInput[_this.iNow].className = "active";
+        _this.aDiv[_this.iNow].style.display = "block"
+    },2000)
+
+}
+
+
+</script>
+</body>
+</html>

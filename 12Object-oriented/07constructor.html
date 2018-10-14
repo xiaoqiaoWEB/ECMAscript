@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #ff7549;
+            position: absolute;
+            left: 50px;
+            top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box" id="drag"></div>
+
+<script>
+    function Aaa(){
+
+    }
+
+   // Aaa.prototype.name = "jeck";
+   // Aaa.prototype.sex = "boy";
+
+    Aaa.prototype = {
+        name :'jeck',
+        sex :'boy'
+    }
+
+    var a = new Aaa();
+
+   // console.log(a.constructor) //Aaa()
+
+    console.log(a.constructor) //Object()
+
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //当new去调用一个函数 : 这个时候函数中的this就是创建出来的对象,而且函数的的返回值直接就是this啦(隐式返回)
+
+    //new后面调用的函数 : 叫做构造函数
+
+    function createPerson(name){
+        this.name = name;
+        this.showName = function(){
+            alert(this.name);
+        }
+    }
+
+
+    let p1 = new createPerson("xiaoxiao");
+    console.log(p1.showName())
+</script>
+</body>
+</html>

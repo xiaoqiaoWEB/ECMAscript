@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="h-tt">
+        <h1 id="title">this is title</h1>
+        <input type="button" value="button" id="btn">
+    </div>
+    <script>
+        let data = {
+            title: '数据的双向绑定',
+            name:'js'
+        }
+        //使用数据的时候，对数据进行劫持 ？（代理）
+        //使用Object.defineProperty 劫持数据，把属性转换成访问器的方式
+        /*
+            getter 
+                获取属性的是触发
+            setter
+                设置属性的时候出发
+        */      
+        
+        obServe(data);
+
+        function obServe (obj) {
+            Object.keys(obj).forEach((item)=>{
+                defineReactive(obj,item,obj[item])
+            })
+        }
+
+        function defineReactive (obj,key,value) {
+            Object.defineProperty(obj,key,{
+                get(){
+                    return value
+                },
+                set(newValue){
+                    value = newValue   
+                    hTitle.innerHTM = newValue
+                }
+            })
+        }
+
+        console.log(data)
+
+        let hTitle = document.getElementById('title');
+        let btn = document.getElementById('btn');
+
+        hTitle.innerHTML = data.title;
+        
+        btn.onclick = function () {
+            hTitle.innerHTML = "数据发生了改变"
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //原型 : 去改写对象下面公用的方法或者属性 , 让公用的方法或者属性在内存中存在一份 ( 提高性能 )
+    //原型 : prototype : 要写在构造函数的下面
+
+
+    function Createperson (name) {
+        this.name = name;
+    }
+
+    Createperson.prototype.showName = function () {
+        alert(this.name)
+    }
+
+
+    var p1 = new Createperson("xiaoxiao");
+    p1.showName();
+
+    var p2 = new Createperson("swx");
+    p2.showName();
+
+    alert(p1.showName == p2.showName) //true
+</script>
+</body>
+</html>

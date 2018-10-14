@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box">box</div>
+<script>
+var box = document.getElementById("box");
+
+binEvent(box,"show",function(){
+    alert(1);
+})
+
+binEvent(box,"show",function(){
+    alert(2);
+})
+
+fireEvent(box,'show');
+
+function binEvent (obj,events,fn) {
+
+    //obj : 楼层
+    //events : 书架
+    //fn : 一本书
+
+    obj.listens = obj.listens || {};
+    obj.listens[events] = obj.listens[events] || [];
+    obj.listens[events].push(fn);
+
+    obj.addEventListener(events,fn,false);
+}
+
+function fireEvent(obj,events) { //主动触发自定义事件
+    for(var i=0; i<obj.listens[events].length; i++){
+        obj.listens[events][i]();
+    }
+}
+
+
+</script>
+</body>
+</html>

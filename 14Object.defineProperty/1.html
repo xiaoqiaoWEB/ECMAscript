@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = {
+            title:'123'
+        }
+        
+        //Object.defineProperty 添加属性
+        Object.defineProperty(data,'name',{
+            configurable:false, //是否可被删除
+            value: 'vue.js',
+            enumerable:false, //是否可被枚举
+            writable: false  //不能被改写
+        })
+
+        console.log(data.title)
+
+        data.name = "xiaoqiao"
+
+        console.log(data.name)
+        
+        //删除对象的属性
+        delete data.title
+
+        console.log(data)
+
+    </script>
+</body>
+</html>

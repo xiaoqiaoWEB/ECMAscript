@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .layout{
+            border: 1px solid #ff7549;
+            width: 100px;
+            position: absolute;
+        }
+        .layout h5{
+            height: 40px;
+            background: #ff7549;
+            line-height: 40px;
+            position: relative;
+        }
+        .layout .close{
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: greenyellow;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="button01">
+    <input type="button" value="button02">
+    <input type="button" value="button03">
+
+
+    <!--<div class="layout">-->
+        <!--<h5>title <span class="close">X</span></h5>-->
+        <!--<div>-->
+            <!--gdsgdfg-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <script>
+        window.onload = function () {
+            var btns = document.querySelectorAll("input");
+
+            btns[0].onclick = function () {
+                var b1 = new Layout ();
+                b1.init({
+                    title:'login',
+                    content:'sfhaudsghdfsihgdshfgusdfhgdhfsgiusdhfgishgoidhfsgihu',
+                    width: "500",
+                    height: "300",
+                    iNow : 0,
+                });
+            }
+
+            btns[1].onclick = function () {
+                var b1 = new Layout ();
+                b1.init({
+                    title:'left',
+                    content:'sfh',
+                    dir:'left',
+                    iNow : 1
+                });
+            }
+
+            btns[2].onclick = function () {
+                var b1 = new Layout ();
+                b1.init({
+                    title:'right',
+                    content:'right',
+                    dir:'right',
+                    iNow : 2
+                });
+            }
+        }
+
+        function Layout () {
+            this.obj = null;
+            this.setting = {
+                title:'title',
+                content:'这里是 content',
+                dir:'center',
+                width:'200',
+                height:"300"
+            };
+        }
+
+        Layout.prototype.show = {};
+
+        Layout.prototype.init = function (opt) {
+            extend(this.setting,opt);
+
+            if(this.show[opt.iNow] == undefined){
+                this.show[opt.iNow] = true;
+            }
+
+            if(this.show[opt.iNow]){
+                this.CreateHtml();
+                this.fnClose();
+            }
+
+            this.show[opt.iNow] = false;
+        }
+
+        Layout.prototype.CreateHtml = function () {
+            this.obj = document.createElement('div');
+            this.obj.className = "layout";
+
+            this.obj.style.width = this.setting.width + "px";
+            this.obj.style.height = this.setting.height + "px";
+
+            if(this.setting.dir == "center"){
+                this.obj.style.left = (viewWidth() - this.obj.offsetWidth)/2 + "px";
+                this.obj.style.top = (viewHeight() - this.obj.offsetHeight)/2 + "px";
+            }else if(this.setting.dir == "right") {
+                this.obj.style.right = 0 + "px";
+                this.obj.style.bottom = 0 + "px";
+            } else if(this.setting.dir == "left"){
+                this.obj.style.left = 0 + "px";
+                this.obj.style.top = 40 + "px";
+            }
+
+            this.obj.innerHTML = `
+                 <h5>${this.setting.title}<span class="close">X</span></h5>
+                <div>
+                   ${this.setting.content}
+                </div>`
+
+            document.body.appendChild(this.obj);
+        }
+
+        Layout.prototype.fnClose = function () {
+            var _this = this;
+            this.btnClase = this.obj.querySelector('.close');
+            this.btnClase.onclick = function () {
+                _this.obj.remove();
+
+                _this.show[_this.setting.iNow] = true;
+            }
+        }
+
+
+        function extend (obj1,obj2){
+            for (attr in obj2){
+                obj1[attr] = obj2[attr];
+            }
+        }
+
+        function viewWidth(){
+            return document.documentElement.clientWidth;
+        }
+        function viewHeight(){
+            return document.documentElement.clientHeight;
+        }
+
+    </script>
+</body>
+</html>

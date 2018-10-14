@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = {
+            title:'xiaoqiao'
+        }
+        
+        Object.defineProperty(data,'title',{
+            get(){
+                console.log('访问了数据')
+                return "123"
+            },
+            set(newValue){
+                console.log('设置了新值')
+                console.log(newValue)
+            }
+        })
+
+        console.log(data.title);
+
+        data.title = "网上学习";
+
+        console.log(data.title);
+
+    </script>
+</body>
+</html>

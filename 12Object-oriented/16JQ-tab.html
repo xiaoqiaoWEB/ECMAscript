@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{}
+        .box input.active{background: #ff7549;
+            color: #000;}
+        .box div{
+            width: 200px;
+            height: 100px;
+            border: 2px solid #000000;
+            display: none;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="box" id="tab1">
+        <input type="button" value="buttonA" class="active">
+        <input type="button" value="buttonB">
+        <input type="button" value="buttonB">
+        <div style="display: block">
+            AAAAAAAA
+        </div>
+        <div>
+            BBBBBBBB
+        </div>
+        <div>
+            CCCCCCCC
+        </div>
+    </div>
+
+    <div class="box" id="tab2">
+        <input type="button" value="buttonA" class="active">
+        <input type="button" value="buttonB">
+        <input type="button" value="buttonB">
+        <div style="display: block">
+            AAAAAAAA
+        </div>
+        <div>
+            BBBBBBBB
+        </div>
+        <div>
+            CCCCCCCC
+        </div>
+    </div>
+
+    <div class="box" id="tab3">
+        <input type="button" value="buttonA" class="active">
+        <input type="button" value="buttonB">
+        <input type="button" value="buttonB">
+        <div style="display: block">
+            AAAAAAAA
+        </div>
+        <div>
+            BBBBBBBB
+        </div>
+        <div>
+            CCCCCCCC
+        </div>
+    </div>
+
+    <div class="box" id="tab4">
+        <input type="button" value="buttonA" class="active">
+        <input type="button" value="buttonB">
+        <input type="button" value="buttonB">
+        <div style="display: block">
+            AAAAAAAA
+        </div>
+        <div>
+            BBBBBBBB
+        </div>
+        <div>
+            CCCCCCCC
+        </div>
+    </div>
+    <input type="button" value="获得t4的当前内容" id="t4">
+
+
+    <div class="box" id="tab5">
+        <input type="button" value="buttonA" class="active">
+        <input type="button" value="buttonB">
+        <input type="button" value="buttonB">
+        <div style="display: block">
+            AAAAAAAA
+        </div>
+        <div>
+            BBBBBBBB
+        </div>
+        <div>
+            CCCCCCCC
+        </div>
+    </div>
+
+<script>
+    /*
+     title : 基于JQ的选项卡组件
+
+	Options : event   delay
+
+	Methods : nowSel()   getContent()
+
+	Events : beforeClick  afterClick
+    */
+
+$(function(){
+    var t1 = new Tab();
+    t1.init("tab1",{});
+
+    var t2 = new Tab();
+    t2.init("tab2",{
+        event:'mouseover'
+    });
+
+    var t3 = new Tab();
+    t3.init("tab3",{
+        event:'mouseover',
+        delay:'500'
+    });
+
+    var t4 = new Tab();
+    t4.init("tab4",{});
+    t4.nowsel(1);
+
+    $("#t4").click(function(){
+        t4.getConte();
+    });
+
+
+    var t5 = new Tab();
+    t5.init("tab5",{});
+    t5.nowsel(2);
+
+    $(t5).on("beforeClick",function(){
+        t5.getConte();
+    })
+
+    $(t5).on("afterClick",function(){
+        t5.getConte();
+    })
+
+})
+
+function Tab() {
+
+    this.paerent = null;
+    this.aInput = null;
+    this.aDiv = null;
+
+    this.setting = {
+        event:'click'
+    };
+}
+
+Tab.prototype.init = function (paerent,opt) {
+
+    $.extend(this.setting,opt);
+
+    this.paerent = $("#"+paerent);
+    this.aInput = this.paerent.find("input");
+    this.aDiv = this.paerent.find("div");
+    this.iNow = 0;
+
+    this.changeTab();
+}
+
+Tab.prototype.changeTab = function () {
+    var _this = this;
+    var timer = null;
+
+    this.aInput.on(this.setting.event,function(){
+        var $this = this;
+        if(_this.setting.event == "mouseover" && _this.setting.delay){
+            timer = setTimeout(function(){
+               show($this);
+            },_this.setting.delay)
+        }else{
+            show(this);
+        }
+
+    }).mouseout(function(){
+        clearTimeout(timer)
+    });
+
+
+    function show (obj) {
+        $(_this).trigger("beforeClick");
+        _this.aInput.attr("class","");
+        _this.aDiv.css("display","none");
+
+        $(obj).attr("class","active");
+        _this.aDiv.eq($(obj).index()).css("display","block");
+
+        _this.iNow = $(obj).index();
+
+
+        $(_this).trigger("afterClick");
+
+    }
+}
+
+Tab.prototype.nowsel = function (index) {
+    this.aInput.attr("class","");
+    this.aDiv.css("display","none");
+
+    this.aInput.eq(index).attr("class","active");
+    this.aDiv.eq(index).css("display","block");
+
+    this.iNow = index;
+}
+
+Tab.prototype.getConte = function () {
+    alert(this.aDiv.eq(this.iNow).html())
+}
+
+</script>
+</body>
+</html>
