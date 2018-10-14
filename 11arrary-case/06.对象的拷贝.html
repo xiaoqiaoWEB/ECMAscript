@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var book = {
+            name:'Css',
+            picture:{
+                small:'../这是小的',
+                middle:'../这是中等的',
+                large:'../这是大的'
+            }
+        }
+
+        //浅拷贝
+        //只是将数据中的 应用  拷贝下来，依旧指向同一个 存放地址
+        
+        //for(v in book)
+        //Object.assign({},book);
+        
+
+        //深拷贝
+        //将数据中的所有数据拷贝下拉，而不是引用，拷贝下来的数据的修改不会影响源数据 
+        
+        //JSON.parse(JSON.stringify(book))   不能拷贝 带有function undefined 的数据
+
+        /*
+        var obj1 = JSON.parse(JSON.stringify(book));
+        
+        obj1.name = "TypeScript"
+
+        console.log(obj1)
+        console.log(book)
+        */
+        
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [10,20,30,10]; //60
+        var num = 0;
+        var num1 = 0;
+        var num2 = 0;
+        var num3 = 0;
+        var num4 = 0;
+        var num5 = 0;
+
+        for(var i=0;i<arr.length;i++){
+            num += arr[i]
+        }
+
+
+        arr.forEach((item)=>{
+            // console.log(item)
+            num1 += item
+        })
+
+        arr.map((item)=>{
+            num2 += item
+        })
+
+        arr.filter((item)=>{
+            num3 += item
+        })
+
+        arr.some((item)=>{
+            num4 += item
+        })
+
+        arr.every((item)=>{
+            return num5 += item
+        })
+
+
+
+
+        console.log(num1,num2,num3,num4,num5)
+
+
+
+        // console.log(num);
+    </script>
+</body>
+</html>

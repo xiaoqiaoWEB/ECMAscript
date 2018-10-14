@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="checkbox" name="funl">A
+    <input type="checkbox" name="funl">B
+    <input type="checkbox" name="funl">C
+    <input type="checkbox" name="funl">D
+    <input type="checkbox" name="funl">F
+    <input type="checkbox" name="all">全选
+    <script>
+        var checkbox = document.querySelectorAll('input[name="funl"]');
+        var checkboxAll = document.querySelector('input[name="all"]');
+        //for
+        var arr = [];
+        for (let i = 0; i < checkbox.length; i++) {
+            arr.push(checkbox[i])
+        }
+        //console.log(arr)
+
+        //Array.from(arr)
+        var arr1 = Array.from(checkbox)
+        //console.log(arr1)
+        
+        /*
+            扩展运算符 ...
+
+            以参数的形式，进行扩展 
+            参数形式：arr1,arr2,arr3
+         */
+
+        arr3 = [...checkbox];
+        //console.log(arr3)
+        
+        //Array.prototype.slice
+        //方法返回一个从开始到结束（不包括结束）选择的数组的一部分浅拷贝到一个新数组对象。且原始数组不会被修改。
+        arr4 = Array.prototype.slice.call(checkbox)
+        //console.log(arr4)
+        
+        
+
+    </script>
+</body>
+</html>

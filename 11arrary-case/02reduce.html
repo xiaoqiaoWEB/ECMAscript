@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [10,20,30,10];
+
+        /*
+            arr.reduce（callback(accumulator,currentValue,[currentIndex],[array])，[initialValue]）
+        */
+        
+        /*
+        reducer 函数接收4个参数:
+        Accumulator (acc) (累计器)
+        Current Value (cur) (当前值)
+        Current Index (idx) (当前索引)
+        Source Array (src) (源数组)
+        */
+        
+        let allNum = arr.reduce((num,now) => {
+            console.log(num,now)
+            return num + now    
+        },0)
+        
+        console.log(allNum)
+
+    </script>
+</body>
+</html>

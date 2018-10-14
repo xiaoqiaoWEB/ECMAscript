@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         var book = {
+            name:'Css',
+            picture:{
+                small:'../这是小的',
+                middle:'../这是中等的',
+                large:'../这是大的'
+            },
+            read:function(){
+
+            },
+            author:["name1","name2"]
+        }
+
+        function clone (obj) {
+            var v = null;
+            if(typeof obj == 'object' && obj !== null){
+                v = obj instanceof Array ? [] : {};
+
+                for(var attr in obj){
+                    v[attr] = clone(obj[attr])
+                }
+
+            }else{
+                v = obj;        
+            }
+            return v;
+        }
+        
+        let book1 = clone(book)
+        console.log(book1)
+
+    </script>
+</body>
+</html>

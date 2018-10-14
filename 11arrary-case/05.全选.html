@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="checkbox" name="funl">A
+    <input type="checkbox" name="funl">B
+    <input type="checkbox" name="funl">C
+    <input type="checkbox" name="funl">D
+    <input type="checkbox" name="funl">F
+    <input type="checkbox" name="all">全选
+    <script>
+        var checkbox = document.querySelectorAll('input[name="funl"]');
+        var checkboxAll = document.querySelector('input[name="all"]');
+        check ()
+    
+        for(var i=0; i<checkbox.length; i++){
+            checkbox[i].onclick = function () {
+                check ()
+            }
+        }
+
+        checkboxAll.onclick = function () {
+            for(var i=0; i<checkbox.length; i++){
+                checkbox[i].checked = checkboxAll.checked
+            }
+        }
+
+        function check () {
+            checkboxAll.checked = [...checkbox].every((item) => {
+                return item.checked
+            })
+        }
+
+
+
+    </script>
+</body>
+</html>

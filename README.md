@@ -1,1 +1,208 @@
 # ECMAscript
+let -----只有在其代码块内有效
+		不能升级
+		同一作用域下不能再次申明同一变量
+const---不可变
+		申明的时候必须赋值
+		储存简单的数据类型是不可以改变值
+		对象的引用不可以修改，对象里面的数据可以改变
+
+结构赋值
+	概念：允许按照一定模式，从数组和对象中提取值，并对变量进行赋值，这被称为解构赋值
+
+	数组的机构赋值
+		let [a, b, c] = [1, 2, 3];
+	对象结构赋值
+		let { foo, bar } = { foo: "aaa", bar: "bbb" }
+		- key 值对应
+		解构赋值-别名
+		let { foo: f, bar: b } = { foo: "aaa", bar: "bbb" }
+		- foo: 原始名称
+		- f：别名
+		多重解构
+		let { foo: [a, b] } = { foo: [10,20], bar: "bbb" }
+
+数据结构Set--集合
+	集合是由一组无序且唯一（不能重复）的项组成
+	特点：key 和 value  相同，没有重复的 value
+	不允许有重复的值
+
+	const s = new Set([1,2,3])
+	//添加数据   返回数据本身
+	s.add('a').add('b')
+
+	//删除数据  返回一个布尔值  表示是否删除成功
+	s.delete('a')
+
+	//has 判断值是否在数据中  返回一个布尔值
+	console.log(s.has("a"))
+
+	//clear清楚数据
+	s.clear();
+
+	keys() 返回键名的遍历器
+	values（） 返回键值的遍历器
+	entries()返回键值对的遍历器
+	forEach(value,key,set )遍历每个成员
+
+map数据结构
+    ---和js中的对象类似，但是Map的key值可以接受任意类型
+	let map = new Map([
+				['a',"1"],
+				["b","2"]
+			])
+			console.log(map)
+			console.log(map.size)
+
+			//添加  返回就是数据本身
+			map.set('c','3').set('d',"4")
+			console.log(map)
+
+			//得到键名的值
+			console.log(map.get("a"))
+
+			//删除值 返回一个布尔值 判断是否删除成功
+			console.log(map.delete("b"))
+
+			console.log(map.keys())
+
+			console.log(map.values())
+
+			console.log(map.entries())
+
+迭代
+	迭代协议
+		规定了迭代与实现的逻辑
+	迭代器
+		具体的迭代实现逻辑
+	迭代对象
+		可被迭代的对象 - [Symbol.iterator]方法
+	迭代语句
+		for...in：以原始插入的顺序迭代对象的可枚举属性
+		for...of：根据迭代对象的迭代器具体实现迭代对象数据
+
+Iterator 遍历器
+	为各种数据结构，提供一个统一的、简便的访问接口
+	使得数据结构的成员能够按一种次序排列
+	Iterator接口主要提供for ... of消费
+
+	凡是有Symbol.iterator属性的数据结构都具有 Iterator 接口
+
+	let obj = {
+				left:100,
+				top:200
+			}
+
+			//console.log(Object.keys(obj))
+
+			obj[Symbol.iterator] = function () {
+				let keys = Object.keys(obj);  //["left","top"]
+				let len = keys.length;
+				let n = 0;
+				return {
+					next:function(){
+						if (n<len) {
+							return {
+								value:{k:keys[n],v:obj[keys[n++]]},
+								done:false
+							}
+						}else{
+							return {
+								done:true
+							}
+						}
+					}
+				}
+			}
+
+			for (var {k,v} of obj) {
+				console.log(k,v)
+			}
+
+数据类型
+	Number、Boolean、String、Symbol、Null、Undefined、Object
+
+	Symbol
+	Symbol类型的值通过Symbol函数生成，相同Symbol函数返回的值是唯一的
+	Symbol函数可以接收字符串作为参数，但是即使相同参数返回的也是唯一值，即 Symbol('miaov') != Symbol('miaov')
+	Symbol不能作为构造函数使用
+		不能转换成数字，不能和字符串拼接，不能做任何运算
+	实例
+		私有变量
+	 const list = {
+        a:"a1",
+        b:'a2',
+        [Symbol()]:"swx",
+        [Symbol()]:"haixu"
+    }
+    console.log(list)
+    //返回一个给定对象自身的所有 Symbol 属性的数组。
+    console.log(Object.getOwnPropertySymbols(list)) //[Symbol(), Symbol()]
+    console.log(list[Object.getOwnPropertySymbols(list)[0]]) //swx
+
+内置对象的扩张
+		模板字符串  ``
+			//repeat(n) 赋值字符n次
+			//includes(v) 判断字符串中是否有v 有返回 true 没有返回 false
+			//startsWith（判断字符串中是否是以 v 开头
+			//endsWith（v）判断字符串是否以v结尾
+		数组
+			 Array.from（）  类数组转换成数组
+			 Array.of() 创建数组
+			 find() 查找某一条件的返回符合的第一个元素    没有返回undefind
+			 findIndex() 查找某一条件的返回符合元素的 第一个下标      没有返回-1
+			 fill( a,n1,n2) 替换数组  用a 替换数组从n1，n2  不包括n2
+			 every(); 每一项都true 才为真
+			 some()；如果有一个为true 返回true
+			 filter(); 过滤
+			 map(); 返回一个新的数组
+
+		对象
+			Object.assign()
+			    合并对象，将元对象的所有可枚举属性，复制到目标对象
+            Object.defineProperty(obj, prop, descriptor)
+                通过 defineProperty 添加或修改的属性，configurable\enumerable\value\writable默认是false
+            Object.create();
+                类复制
+
+
+函数的扩展
+	1.为函数参数指定默认值
+	2.函数的rest参数
+	3.箭头函数
+	    箭头函数 - 注意事项
+    	    内部this对象指向创建期上下文对象
+    	    不能作为构造函数
+    	    没有arguments
+    	    不能作为生成器函数
+
+Promise 异步编程
+     * 基本概念：
+     *  Promise：是ES6中新增的异步编程解决方案，体现在代码中它是一个对象，
+     *          可以通过 Promise 构造函数来实例化。
+     *
+     *  - new Promise(cb)  ===> 实例的基本使用  Pending Resolved Rejected
+     *
+     *  > 两个原型方法：
+            成功的时候执行
+     *    - Promise.prototype.then()
+             失败的时候执行
+     *    - Promise.prototype.catch()
+     *
+     *  > 两个常用的静态方法：
+     *    - Promise.all()
+                 //只有所有的异步成功返回 resolve
+     *    - Promise.resolve()
+                /参数是Prosize实例，将不做任何修改，原封不动地返回这个实例
+
+
+     Promise
+          构造函数
+          接受一个参数：callback，我们把要执行的异步任务放置在这个callback中
+
+          Promise对象内部会维护一个状态
+              默认是：pending
+              成功：resolved
+              失败：rejected
+
+          Promise对象下有一个方法：then，该方法在Promise对象的状态发生改变的时候触发then的回调
