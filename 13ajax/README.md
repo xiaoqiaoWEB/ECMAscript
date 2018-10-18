@@ -73,3 +73,4 @@ source.onmessage = function(event) {
 创建一个新的 EventSource 对象，然后规定发送更新的页面的 URL（本例中是 "demo_sse.php"）
 每当接收到一次更新，就会发生 onmessage 事件
 当 onmessage 事件发生时，把已接收的数据推入 id 为 "result" 的元素中
+	--服务器端事件流的语法非常简单。请把 "Content-Type" 报头设置为 "text/event-stream"。现在，您可以开始发送事件流了。
